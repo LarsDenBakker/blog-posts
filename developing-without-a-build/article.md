@@ -155,7 +155,7 @@ npm i --save lodash-es
 ```javascript
 import kebabCase from '../node_modules/lodash-es/kebabCase.js';
 
-console.log('lodash: ', _);
+console.log(kebabCase('camelCase'));
 ```
 
 Lodash is a very modular library, the `kebabCase` function depends on a lot of other modules. These dependencies are taken care of automatically, the browser resolves and imports them for you:
