@@ -16,7 +16,7 @@ To start let's create an empty npm project and install `es-dev-server`:
 ```bash
 npm init
 cd <your-project-name>
-npm i -D es-dev-server
+npm i es-dev-server
 ```
 
 Create an `index.html` in the root of your project:
