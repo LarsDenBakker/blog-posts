@@ -255,7 +255,7 @@ Instead I think the starting point should be reverted. Instead of trying to make
 ## es-dev-server
 You can do almost everything described in this article with any regular http server. That being said, there are still web server features which can really help the development experience. For example smart caching, SPA routing, resolving node modules, reloading the browser on file changes and making your code compatible for running on older browsers.
 
-For this reason I created [es-dev-server](https://www.npmjs.com/package/es-dev-server). (TODO: Link to article)
+At `open-wc` we created [es-dev-server](https://www.npmjs.com/package/es-dev-server) to help with this. It is specifically designed for developing without a build, but also supports light transformations with babel. For example for compatibility with older browsers, or for supporting typescript.
 
 ## Getting started
 To get started with developing without any build tools, you can use the `open-wc` project scaffolding to set up the basics:
