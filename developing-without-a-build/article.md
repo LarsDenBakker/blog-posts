@@ -1,7 +1,7 @@
 # Developing Without a Build
 In the early days of web development, all we needed was a simple file editor and a web server. It was easy for a newcomer to understand the process and get started making their own web pages. Web development has changed a lot since then: the complexity of the tools we use for development has grown just as much as the complexity of the things that we're building on the web.
 
-These tools can be really complex, projects can set up systems which transform different syntaxes and dialects into bundles we can run in the browser. Source maps need to be configured carefully between the different tools, so that we can still recognize and debug our code in the browser.
+Nowadays, developers can set up systems which transform their code from one syntax to another, turning code that would crash any web browser into code that runs on most or all browsers. To aid debugging, source maps need to be configured carefully between the different tools, so that we can still recognize and debug our code in production, where it matters most.
 
 Imagine a new person coming into web development, even experienced developers, they first need to learn about a lot of different tools before they can get to actual development. Their IDE and linter don't understand the syntax of this framework that was recommended to them by a friend. Installing a few extra plugins solved that. After that they ran into some more errors... Turns out they wanted to keep it simple and not use typescript, but they didn't configure the babel plugins for decorators correctly in the right order so the project didn't compile. Oops!
 
