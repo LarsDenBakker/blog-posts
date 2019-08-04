@@ -119,7 +119,7 @@ Now we are not importing the message module right away, but delaying it until th
 ### Lazy evaluation
 This is where developing without a bundler has a significant benefit. If you bundle your application before serving it to the browser, the bundler needs to evaluate all your dynamic imports to do code splitting and output separate chunks. For large applications with a lot of dynamic imports this can add significant overhead as the entire application is built and bundled before you can see anything.
 
-When serving unbundled modules, the entire process is lazy. The browser only does the necessary work to loading the modules that were actually requested.
+When serving unbundled modules, the entire process is lazy. The browser only does the necessary work to load the modules that were actually requested.
 
 Dynamic imports are supported by the latest versions of Chrome, Safari and Firefox. It's not supported in the current version of Edge, but will be supported by the new Chromium based Edge.
 
