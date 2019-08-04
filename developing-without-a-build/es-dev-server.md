@@ -50,7 +50,7 @@ One of the first things you will run into when developing without any build tool
 import foo from 'foo';
 ```
 
-Out of the box, the browser will throw an error, as it doesn't know how to handle these kinds of imports. In our previous article (TODO: Link) we explored how these imports by using import maps, an upcoming browser API.
+Out of the box, the browser will throw an error, as it doesn't know how to handle these kinds of imports. In our previous article (TODO: Link) we explored how to use these imports by using import maps, an upcoming browser API.
 
 Until import maps are properly supported in browsers, we can use the `--node-resolve` flag of the dev server. This will rewrite imports in your modules using NodeJS module resolution before they are served to the browser.
 
