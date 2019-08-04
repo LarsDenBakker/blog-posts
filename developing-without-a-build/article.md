@@ -1,4 +1,4 @@
-# Developing without a build
+# Developing Without a Build
 In the early days of web development all we needed was a simple file editor and a web server. The development experience was really simple, and easy for a newcomer to understand and get started. Web development has changed a lot since then, the complexity of the tools we use for development has grown just as much as the complexity of the things that we're building on the web.
 
 These tools can be really complex, projects can set up systems which transform different syntaxes and dialects into bundles we can run in the browser. Source maps need to be configured carefully between the different tools, so that we can still recognize and debug our code in the browser.
