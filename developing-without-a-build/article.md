@@ -16,7 +16,7 @@ I'm not criticizing any of the tools, they have a role and a purpose. And for a 
 
 However nowadays I think build tools and bundlers should be primarily for production optimization, for development I think we can go back to basics. Browser support for es module features has improved a lot in recent years.
 
-In this article we will explore different ways of loading modules in the browser, and offer practical advice on how to handle different scenarios. We will start by looking at javascript modules, and later look at html, css and json as well.
+In this article we will explore different ways of loading modules in the browser, and offer practical advice on how to handle different scenarios. We will start by looking at javascript modules, and later look at HTML, CSS and JSON as well.
 
 ## Loading modules in the browser
 This is not exact step by step tutorial, but you can follow along with any of the examples by using any simple web server. For example `http-server` from npm. Run it with `-c-1` to disable time based caching.
@@ -69,7 +69,7 @@ console.log(`The message is: ${message}`);
 ```
 
 `src/message.js`:
-```js
+```javascript
 export const message = 'hello world';
 ```
 
@@ -130,14 +130,14 @@ Not all browser APIs resolve requests relative to the module's location. For exa
 
 To handle these cases we can use `import.meta.url` to get information about the current module's location.
 
-`import.meta` is a special object which contains metadata about the currently executing module. `url` is the first property that's exposed here, and works a lot like `__dirname` in node js.
+`import.meta` is a special object which contains metadata about the currently executing module. `url` is the first property that's exposed here, and works a lot like `__dirname` in NodeJS.
 
 `import.meta.url` points to the url the module was imported with:
-```js
+```javascript
 console.log(import.meta.url); // logs http://localhost:8080/path/to/my/file.js
 ```
 
-We can use the `URL` API for easy URL building. For example to request a json file:
+We can use the `URL` API for easy URL building. For example to request a JSON file:
 ```javascript
 const lang = 'en-US';
 
@@ -198,7 +198,7 @@ You can test this in your browser by turning off `Disable cache` and refreshing:
 ## Non-js modules
 So far we've only looked into javascript modules, and the story is looking pretty complete. It looks like we've got the tools needed to build different kinds of applications. But on the web we're not just writing javascript, we need to deal with other langauges as well.
 
-The good news is that there are proposals for html, css and json modules and all major browser vendors seem to be supportive of them:
+The good news is that there are proposals for HTML, CSS and JSON modules and all major browser vendors seem to be supportive of them:
 - [json modules](https://github.com/whatwg/html/issues/4315)
 - [html modules](https://github.com/w3c/webcomponents/issues/645)
 - [css modules](https://github.com/w3c/webcomponents/issues/759)
@@ -206,44 +206,44 @@ The good news is that there are proposals for html, css and json modules and all
 The bad news is that they're not available just yet, and it will be a while for all browsers to support them. We have to look for some solutions in the meantime.
 
 ### JSON
-In Node JS it's possible to import json files from javascript. These becomes available as javascript object. In web projects this is used frequently as well. There are many build tool plugins to make this possible.
+In Node JS it's possible to import JSON files from javascript. These becomes available as javascript object. In web projects this is used frequently as well. There are many build tool plugins to make this possible.
 
-Until browsers support json modules, we can either just use a javascript module or use fetch to retreive the json files. See the `import.meta.url` section of an example of using fetch.
+Until browsers support JSON modules, we can either just use a javascript module or use fetch to retreive the JSON files. See the `import.meta.url` section of an example of using fetch.
 
 ### HTML
-Over time web frameworks have solved html templating in different ways, for example by placing HTML inside javascript strings. Lately JSX has become a popular format for embedding HTML inside javascript, but it is not going to run natively in the browser without some kind of transformation.
+Over time web frameworks have solved HTML templating in different ways, for example by placing HTML inside javascript strings. Lately JSX has become a popular format for embedding HTML inside javascript, but it is not going to run natively in the browser without some kind of transformation.
 
-If you really want to author html in html files, you could use `fetch` to download your html templates before using it with whatever rendering/component system you are using. I don't recommend this becuase as it's hard to optimize for production. You want something that can be statically anylzed and optimized by a bundler, so that you don't spawn a lot of requests in production.
+If you really want to author HTML in HTML files, you could use `fetch` to download your HTML templates before using it with whatever rendering/component system you are using. I don't recommend this becuase as it's hard to optimize for production. You want something that can be statically anylzed and optimized by a bundler, so that you don't spawn a lot of requests in production.
 
-With es2015/es6 we can use tagged template string literals to embed html inside js, and use it for doing efficient DOM updates. Because html templating often comes with a lot of dynamism, it feels great that we can use javascript to express this dynamic behavior instead of having to learn a whole new templating language. It runs natively in the browser, has a great developer experience and co-exists with the module graph so it can be optimized for production.
+With es2015/es6 we can use tagged template string literals to embed HTML inside JS, and use it for doing efficient DOM updates. Because HTML templating often comes with a lot of dynamism, it feels great that we can use javascript to express this dynamic behavior instead of having to learn a whole new templating language. It runs natively in the browser, has a great developer experience and co-exists with the module graph so it can be optimized for production.
 
 There are some really good production ready and feature complete libraries that can be used for this:
 
 - [htm, JSX using template literals. Works with libraries that use JSX, such as react](https://www.npmjs.com/package/htm)
-- [lit-html, a html templating library](https://www.npmjs.com/package/lit-html)
+- [lit-html, a HTML templating library](https://www.npmjs.com/package/lit-html)
 - [lit-element, integrates lit-html with web components](https://www.npmjs.com/package/lit-element)
 - [haunted, a functional web components library with react-like hooks](https://www.npmjs.com/package/haunted)
 - [hybrids, another functional web component library](https://www.npmjs.com/package/hybrids)
-- [hyperHTML, a html templating library](https://www.npmjs.com/package/hyperhtml)
+- [hyperHTML, a HTML templating library](https://www.npmjs.com/package/hyperhtml)
 
 For syntax highlighting you might need to configure your IDE or install a plugin.
 
 ### CSS
 For HTML and JSON there are sufficient alternatives. Unfortunately with CSS it is more complicated. By itself CSS is not modular as it affects the entire page. A common complaint that this is what makes CSS so difficult to scale.
 
-There a lot of different ways to write css, it's beyond the scope of this article to look into all of them. When working without a build, regular stylesheets will just work fine of course.
+There a lot of different ways to write CSS, it's beyond the scope of this article to look into all of them. When working without a build, regular stylesheets willust work fine of course.
 
 If you are using some kind of CSS preprocessor you can run it before running your web server and just load the CSS output. Many CSS in JS solutions should also work if the library publishes an es module format.
 
 #### Shadow dom
 For truly modular CSS I recommend looking into [Shadow dom](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM), it fixes many of the scoping and encapsulation problems of CSS. Unfortunately, it's not yet a complete story. There are still missing features that are being worked out in the standard so it may not yet be the [right solution in all scenarios](https://dev.to/webpadawan/beyond-the-polyfills-how-web-components-affect-us-today-3j0a).
 
-Good to mention here is [the lit-element library](https://www.npmjs.com/package/lit-element), which offers a great developer experience when authoring modular CSS without a build step. `lit-element` does most of the heavy lifting for you. You author css using tagged template literals, which are just syntax sugar for creating a [Constructable Stylesheet](https://developers.google.com/web/updates/2019/02/constructable-stylesheets). This way you can write and share CSS between your components.
+Good to mention here is [the lit-element library](https://www.npmjs.com/package/lit-element), which offers a great developer experience when authoring modular CSS without a build step. `lit-element` does most of the heavy lifting for you. You author CSS using tagged template literals, which are just syntax sugar for creating a [Constructable Stylesheet](https://developers.google.com/web/updates/2019/02/constructable-stylesheets). This way you can write and share CSS between your components.
 
-This will integrate well with css modules when they are shipped. We could emulate css modules by using fetch, but like we saw with html it's hard to optimize this for production use. I'm not a fan of css in js, but I really feel that lit-element's solution is different and very elegant. You're writing css in a js file, but you're still writing valid css syntax. If you like to keep things pure, you can just create a my-styles.css.js file and use a default export of just a stylesheet.
+This will integrate well with CSS modules when they are shipped. We could emulate CSS modules by using fetch, but like we saw with HTML it's hard to optimize this for production use. I'm not a fan of CSS in JS, but I really feel that lit-element's solution is different and very elegant. You're writing CSS in a JS file, but you're still writing valid CSS syntax. If you like to keep things pure, you can just create a my-styles.css.js file and use a default export of just a stylesheet.
 
 ### Library support
-Luckily the amount of libraries shipping as es module format is growing steadily. But there are still popular libraries which only as ship UMD or common js. These don't work without some kind of code transformation. The best thing we can do it open issues on these projects to give them an indication how many people are interested in supporting the native module syntax.
+Luckily the amount of libraries shipping as es module format is growing steadily. But there are still popular libraries which only as ship UMD or CommonJS. These don't work without some kind of code transformation. The best thing we can do it open issues on these projects to give them an indication how many people are interested in supporting the native module syntax.
 
 I think this is a problem that will disappear relatively quickly, especially after Node JS implements es modules as well. Many projects already use es modules as their authoring format, and I don't think anyone likes having to ship multiple module formats.
 
