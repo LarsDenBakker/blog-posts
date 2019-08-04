@@ -1,8 +1,14 @@
 # Developing Without a Build: es-dev-server
-This article is part of a series on developing without a build. See the general introduction for more information:
-(TODO)
+This article is part of a series on developing without a build:
+- Introduction
+- es-dev-server (this article)
+- Testing (coming soon!)
 
-[es-dev-server](https://www.npmjs.com/package/es-dev-server) is a composable web server, designed to help development without any build step. It improves developer productivity with features such as caching, reloading on file changes, SPA routing, node resolve bare imports and compatibility modes to support older browsers.
+In the introduction we looked into different workflows and browser APIs. In this article we will look into how we can set up `es-dev-server`, and how it helps with development without a build.
+
+## es-dev-server
+
+[es-dev-server](https://www.npmjs.com/package/es-dev-server) is a composable web server that focuses on developer productivity when developing with a build. Through options, you can opt into features such as caching, reloading on file changes, SPA routing, resolving bare module imports and compatibility modes to support older browsers.
 
 ## Setup
 To start let's create an empty npm project and install `es-dev-server`:
@@ -174,3 +180,8 @@ In `all` compatibilty mode support is extended to older browsers, all the way to
 In the previous article we briefly discussed import maps as an upcoming browser feature which handles bare module imports. `es-module-shims` and `systemjs` both support import maps. If compatibility mode is enabled, the dev server takes care of adapting your import maps to work with these libraries, making this a viable workflow during development.
 
 The import maps API is not fully stabalized yet, so if you're going down this path it's good to keep an eye how this standard evolves.
+
+## es-dev-server as a library
+Outside of the command line the dev server can also be used as a NodeJS library. This way you can integrate it with other tools. You can read more about that in the server's documentation.
+
+See the next article in this series for an integration of the dev server with karma for testing.

@@ -1,4 +1,9 @@
-# Developing Without a Build
+# Developing Without a Build: Introduction
+This article is part of a series on developing without a build:
+- Introduction (this article)
+- es-dev-server
+- Testing (coming soon!)
+
 In the early days of web development, all we needed was a simple file editor and a web server. It was easy for a newcomer to understand the process and get started making their own web pages. Web development has changed a lot since then: the complexity of the tools we use for development has grown just as much as the complexity of the things that we're building on the web.
 
 Nowadays, developers can set up systems which transform their code from one syntax to another, turning it into code that actually runs in the browsers. To aid debugging, source maps need to be configured carefully between the different tools, so that we can still recognize and debug our code in the browser.
