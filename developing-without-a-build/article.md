@@ -8,7 +8,7 @@ Imagine whats it's like for a newcomer or even an experienced developer:
 - Their IDE and linter won't understand the syntax of this new framework that was recommended to them by a friend, so they have to look for some extra plugins
 - After that they run into some more errors... Turns out they wanted to keep it simple and not use typescript, but they didn't configure the babel plugins for decorators correctly in the right order so the project didn't compile
 
-It may sound exaggerated, but this experience is common to a lot of developers. You may have jumped through similar hoops yourself only to think "this is just the way modern web development is".
+It may sound exaggerated, but this experience is common to a lot of developers. You may have jumped through similar hoops yourself.
 
 I feel that's really a shame. One of the key selling points of the web is and always was that's an easy and open format. It should be easy to just get started right away without a lot of configuration, tooling, pomp, and ceremony.
 
