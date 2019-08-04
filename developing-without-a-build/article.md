@@ -17,7 +17,6 @@ In this article we will explore different ways of loading modules in the browser
 This is not exact step by step tutorial, but you can follow along with any of the examples by using any simple web server. For example `http-server` from npm. Run it with `-c-1` to disable time based caching.
 
 ```bash
-npm i -D http-server
 npx http-server -o -c-1
 ```
 
@@ -182,7 +181,7 @@ This doesn't work in the browser out of the box, as it doesn't know what file to
 
 It's currently [implemented in chrome behind a flag](https://developers.google.com/web/updates/2019/03/kv-storage#import_maps), and it's easy to shim on other browsers [with es-module-shims](https://www.npmjs.com/package/es-module-shims). Until we get broad browser support, that can be an interesting option during development.
 
-If you don't want to go quite as cutting edge but still want to use the bare imports a great option is to use a web server which rewrites the bare imports on the fly into explicit paths before serving them to the browser. There are some quite servers available that do this. Of course I recommend [es-dev-server](https://www.npmjs.com/package/es-dev-server) since I wrote it myself :)
+If you don't want to go quite as cutting edge but still want to use the bare imports a great option is to use a web server which rewrites the bare imports on the fly into explicit paths before serving them to the browser. There are some servers available that do this. I recommend [es-dev-server](https://www.npmjs.com/package/es-dev-server), read more about it at the end of this article.
 
 ### Caching
 Because we aren't bundling all of our code into just a few files, we don't have to set up any elaborate caching strategies. Your web server can use the file system's last modified timestamp to return a 304 if the file hasn't changed.
@@ -209,7 +208,11 @@ Until browsers support json modules, we can either just use a javascript module 
 ### HTML
 Over time web frameworks have solved html templating in different ways, for example by placing HTML inside javascript strings. Lately JSX has become a popular format for embedding HTML inside javascript, but it is not going to run natively in the browser without some kind of transformation.
 
-With es2015/es6 we can use tagged template string literals to embed html inside js, and use it for doing efficient DOM updates. This runs natively in the browser and still offers a great developer experience. There are some really good production ready and feature complete libraries that can be used for this:
+If you really want to author html in html files, you could use `fetch` to download your html templates before using it with whatever rendering/component system you are using. I don't recommend this becuase as it's hard to optimize for production. You want something that can be statically anylzed and optimized by a bundler, so that you don't spawn a lot of requests in production.
+
+With es2015/es6 we can use tagged template string literals to embed html inside js, and use it for doing efficient DOM updates. Because html templating often comes with a lot of dynamism, it feels great that we can use javascript to express this dynamic behavior instead of having to learn a whole new templating language. It runs natively in the browser, has a great developer experience and co-exists with the module graph so it can be optimized for production.
+
+There are some really good production ready and feature complete libraries that can be used for this:
 
 - [htm, JSX using template literals. Works with libraries that use JSX, such as react](https://www.npmjs.com/package/htm)
 - [lit-html, a html templating library](https://www.npmjs.com/package/lit-html)
@@ -217,7 +220,6 @@ With es2015/es6 we can use tagged template string literals to embed html inside 
 - [haunted, a functional web components library with react-like hooks](https://www.npmjs.com/package/haunted)
 - [hybrids, another functional web component library](https://www.npmjs.com/package/hybrids)
 - [hyperHTML, a html templating library](https://www.npmjs.com/package/hyperhtml)
-(TODO: more libraries?)
 
 For syntax highlighting you might need to configure your IDE or install a plugin.
 
@@ -229,9 +231,11 @@ There a lot of different ways to write css, it's beyond the scope of this articl
 If you are using some kind of CSS preprocessor you can run it before running your web server and just load the CSS output. Many CSS in JS solutions should also work if the library publishes an es module format.
 
 #### Shadow dom
-For truly modular CSS I recommend looking into [Shadow dom](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM), it fixes many of the scoping and encapsulation problems of CSS. Unfortunately, it's not yet a complete story. There are still missing features that are being worked out in the standard so it may not yet be the right solution in all scenarios. (TODO: Link to article?)
+For truly modular CSS I recommend looking into [Shadow dom](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM), it fixes many of the scoping and encapsulation problems of CSS. Unfortunately, it's not yet a complete story. There are still missing features that are being worked out in the standard so it may not yet be the [right solution in all scenarios](https://dev.to/webpadawan/beyond-the-polyfills-how-web-components-affect-us-today-3j0a).
 
-Good to mention here is [the lit-element library](https://www.npmjs.com/package/lit-element), which offers a great developer experience when authoring modular CSS without a build step. `lit-element` does most of the heavy lifting for you. You author css using tagged template literals, which are just syntax sugar for creating a [Constructable Stylesheet](https://developers.google.com/web/updates/2019/02/constructable-stylesheets). This way you can write and share CSS between your components. This will integrate well with css modules when they are shipped.
+Good to mention here is [the lit-element library](https://www.npmjs.com/package/lit-element), which offers a great developer experience when authoring modular CSS without a build step. `lit-element` does most of the heavy lifting for you. You author css using tagged template literals, which are just syntax sugar for creating a [Constructable Stylesheet](https://developers.google.com/web/updates/2019/02/constructable-stylesheets). This way you can write and share CSS between your components.
+
+This will integrate well with css modules when they are shipped. We could emulate css modules by using fetch, but like we saw with html it's hard to optimize this for production use. I'm not a fan of css in js, but I really feel that lit-element's solution is different and very elegant. You're writing css in a js file, but you're still writing valid css syntax. If you like to keep things pure, you can just create a my-styles.css.js file and use a default export of just a stylesheet.
 
 ### Library support
 Luckily the amount of libraries shipping as es module format is growing steadily. But there are still popular libraries which only as ship UMD or common js. These don't work without some kind of code transformation. The best thing we can do it open issues on these projects to give them an indication how many people are interested in supporting the native module syntax.
