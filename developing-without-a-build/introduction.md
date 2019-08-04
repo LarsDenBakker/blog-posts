@@ -186,7 +186,7 @@ This doesn't work in the browser out of the box, as it doesn't know what file to
 
 It's currently [implemented in chrome behind a flag](https://developers.google.com/web/updates/2019/03/kv-storage#import_maps), and it's easy to shim on other browsers [with es-module-shims](https://www.npmjs.com/package/es-module-shims). Until we get broad browser support, that can be an interesting option during development.
 
-If you don't want to go quite as cutting edge but still want to use the bare imports a great option is to use a web server which rewrites the bare imports on the fly into explicit paths before serving them to the browser. There are some servers available that do this. I recommend [es-dev-server](https://www.npmjs.com/package/es-dev-server), read more about it at the end of this article.
+It's still quite for import maps, for most people it's not feasible to go quite as cutting edge yet. Luckily another solution is to use a web server which rewrites the bare imports into explicit paths on the fly before serving modules to the browser. There are some servers available that do this. I recommend [es-dev-server](https://www.npmjs.com/package/es-dev-server), read more about it at the end of this article.
 
 ### Caching
 Because we aren't bundling all of our code into just a few files, we don't have to set up any elaborate caching strategies. Your web server can use the file system's last modified timestamp to return a 304 if the file hasn't changed.
@@ -253,9 +253,9 @@ The goal of this article was to explore workflows where we don't need to do any 
 Instead I think the starting point should be reverted. Instead of trying to make our production build work during development, we should be writing standard code that runs in the browser as is and perform light transformation on that code where necessary.
 
 ## es-dev-server
-You can do almost everything described in this article with any regular http server. That being said, there are still web server features which can really help the development experience. For example smart caching, SPA routing, resolving node modules, reloading the browser on file changes and making your code compatible for running on older browsers.
+You can do almost everything described in this article with any regular http server. That being said, there are still web server features which can really help the development experience.
 
-At `open-wc` we created [es-dev-server](https://www.npmjs.com/package/es-dev-server) to help with this. It is specifically designed for developing without a build, but also supports light transformations with babel. For example for compatibility with older browsers, or for supporting typescript.
+At `open-wc` we created [es-dev-server](https://www.npmjs.com/package/es-dev-server), a composable web server designed to help development without any build step. It improves developer productivity with features such as caching, reloading on file changes, SPA routing, node resolve bare imports and a compatibility mode for older browsers.
 
 ## Getting started
 To get started with developing without any build tools, you can use the `open-wc` project scaffolding to set up the basics:
