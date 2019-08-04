@@ -179,7 +179,7 @@ In `all` compatibility mode support is extended to older browsers, all the way t
 ## Import maps
 In the previous article, we briefly discussed import maps as an upcoming browser feature which handles bare module imports. `es-module-shims` and `systemjs` both support import maps. If compatibility mode is enabled, the dev server takes care of adapting your import maps to work with these libraries, making this a viable workflow during development.
 
-The import maps API is not fully stabilized yet, so if you're going down this path it's good to keep an eye how this standard evolves.
+The import maps API is not fully stabilized yet, so if you're going down this path it's good to keep an eye how this standard evolves. [Check out this article](https://dev.to/open-wc/on-the-bleeding-edge-3cb8) for a workflow using import maps.
 
 ## es-dev-server as a library
 Outside of the command line, the dev server can also be used as a NodeJS library. This way you can integrate it with other tools. You can read more about that in the server's documentation.
