@@ -3,7 +3,12 @@ In the early days of web development, all we needed was a simple file editor and
 
 Nowadays, developers can set up systems which transform their code from one syntax to another, turning it into code that actually runs in the browsers. To aid debugging, source maps need to be configured carefully between the different tools, so that we can still recognize and debug our code in the browser.
 
-Imagine a new person coming into web development, even experienced developers, they first need to learn about a lot of different tools before they can get to actual development. Their IDE and linter don't understand the syntax of this framework that was recommended to them by a friend. Installing a few extra plugins solved that. After that they ran into some more errors... Turns out they wanted to keep it simple and not use typescript, but they didn't configure the babel plugins for decorators correctly in the right order so the project didn't compile. Oops!
+Imagine whats it's like for a newcomer or even an experienced web developer:
+- They first need to learn a lot of different tools before they can get their code to actually run
+- Their IDE and linter didn't understand the syntax of the framework that was recommended to them by a friend, so they had to install a few extra plugins
+- After that they ran into some more errors... Turns out they wanted to keep it simple and not use typescript, but they didn't configure the babel plugins for decorators correctly in the right order so the project didn't compile. 
+
+Oops!
 
 It sounds exaggerated, but these things are really happening to people. I feel that's really a shame. One of the key selling points of the web is that's an easy and open format. It should also be easy to just get started right away without a lot of ceremony.
 
