@@ -117,7 +117,7 @@ window.addEventListener('click', async () => {
 Now we are not importing the message module right away, but delaying it until the user has clicked anywhere on the page. We can await the promise returned from the import and interact with the modules. Any exported members are avaible on the module object.
 
 ### Lazy evaluation
-This is where developing without a bundler has a significant benefit. If you bundle your application before serving it to the browser, the bundler needs to evaluate all your dynamic imports to do code splitting and output separate chunks. For large applications with a lot of dynamic imports this can add significant overhead as the entire application is built and bundled before you can see anything anything.
+This is where developing without a bundler has a significant benefit. If you bundle your application before serving it to the browser, the bundler needs to evaluate all your dynamic imports to do code splitting and output separate chunks. For large applications with a lot of dynamic imports this can add significant overhead as the entire application is built and bundled before you can see anything.
 
 When serving unbundled modules the entire process is lazy, the browser only does the necessary work for loading the requested modules.
 
