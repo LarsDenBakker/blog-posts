@@ -8,7 +8,7 @@ In the introduction, we looked into different workflows and browser APIs. In thi
 
 ## es-dev-server
 
-[es-dev-server](https://www.npmjs.com/package/es-dev-server) is a composable web server that focuses on developer productivity when developing with a build. Through options, you can opt into features such as caching, reloading on file changes, SPA routing, resolving bare module imports and compatibility modes to support older browsers.
+[es-dev-server](https://www.npmjs.com/package/es-dev-server) is a composable web server that focuses on developer productivity when developing with a build step. Through options, you can opt into features such as caching, reloading on file changes, SPA routing, resolving bare module imports and compatibility modes to support older browsers.
 
 ## Setup
 To start let's create an empty npm project and install `es-dev-server`:
